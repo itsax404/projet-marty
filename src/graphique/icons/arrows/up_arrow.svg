@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-7636390f-f386-4fd1-a7a1-46a9b31d3ecf" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212.6 471.77">
+  <defs>
+    <style>
+      .uuid-730a2c0b-60c4-4c3b-ad28-0ce8c362ac1c {
+        fill: #fff;
+      }
+
+      .uuid-730a2c0b-60c4-4c3b-ad28-0ce8c362ac1c, .uuid-35192f9f-60b1-4ba8-8919-a58ac8f69bc4 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .uuid-35192f9f-60b1-4ba8-8919-a58ac8f69bc4 {
+        fill: #30c5eb;
+        stroke-width: 10px;
+      }
+    </style>
+  </defs>
+  <line class="uuid-730a2c0b-60c4-4c3b-ad28-0ce8c362ac1c" x1="106.3" y1="58.53" x2="106.3" y2="360.18"/>
+  <path class="uuid-35192f9f-60b1-4ba8-8919-a58ac8f69bc4" d="M75.94,466.77h59.4c5.93,0,10.74-5.2,10.74-11.6V190.9c0-8.9,8.9-14.49,16.05-10.08l29.36,18.1c9.48,5.84,20.04-5.56,14.65-15.81L115.56,10.87c-4.1-7.79-14.47-7.83-18.63-.07L6.51,179.82c-5.54,10.35,5.27,21.89,14.78,15.78l25.83-16.6c7.12-4.58,16.16.93,16.22,9.89l1.87,266.36c.04,6.37,4.84,11.52,10.74,11.52Z"/>
+</svg>

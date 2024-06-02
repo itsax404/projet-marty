@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="uuid-12484ecc-fe36-4222-9683-84c6efd01c9d"
+   data-name="Calque 1"
+   viewBox="0 0 471.77 301.65"
+   version="1.1"
+   sodipodi:docname="left_arrow.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview22"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.5648092"
+     inkscape:cx="235.88499"
+     inkscape:cy="154.00756"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="uuid-12484ecc-fe36-4222-9683-84c6efd01c9d" />
+  <defs
+     id="defs15">
+    <style
+       id="style13">
+      .uuid-66a1041b-f304-426e-bee7-b2e15b5c5ea4 {
+        fill: #fff;
+      }
+
+      .uuid-66a1041b-f304-426e-bee7-b2e15b5c5ea4, .uuid-ed279546-7bfc-4b33-8b5c-bd996a006bb4 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .uuid-ed279546-7bfc-4b33-8b5c-bd996a006bb4 {
+        fill: #30c5eb;
+        stroke-width: 10px;
+      }
+    </style>
+  </defs>
+  <path
+     class="uuid-ed279546-7bfc-4b33-8b5c-bd996a006bb4"
+     d="M466.77,207.64v-59.4c0-5.93-5.2-10.74-11.6-10.74H190.9c-8.9,0-14.49-8.9-10.08-16.05l18.1-29.36c5.84-9.48-5.56-20.04-15.81-14.65L10.87,168.02c-7.79,4.1-7.83,14.47-.07,18.63l169.03,90.43c10.35,5.54,21.89-5.27,15.78-14.78l-16.6-25.83c-4.58-7.12.93-16.16,9.89-16.22l266.36-1.87c6.37-.04,11.52-4.84,11.52-10.73Z"
+     id="path19" />
+</svg>

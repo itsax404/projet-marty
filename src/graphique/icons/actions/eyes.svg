@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 446.74 296.41">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1d1d1b;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #1d1d1b;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="M201.04,130.36h0c-39.61-48.6-113.31-48.6-152.93,0h0c-31.06,38.11-29.94,93.41,2.64,130.2h0c39.37,44.46,108.27,44.46,147.64,0h0c32.58-36.79,33.71-92.09,2.64-130.21Z"/>
+  <path class="cls-2" d="M399.1,130.36h0c-39.61-48.6-113.31-48.6-152.93,0h0c-31.06,38.11-29.94,93.41,2.64,130.2h0c39.37,44.46,108.27,44.46,147.64,0h0c32.58-36.79,33.71-92.09,2.64-130.21Z"/>
+  <rect class="cls-1" x="75.08" y="144.41" width="98.99" height="98.99" rx="49.5" ry="49.5" transform="translate(-100.63 144.88) rotate(-45)"/>
+  <rect class="cls-1" x="273.14" y="144.41" width="98.99" height="98.99" rx="49.5" ry="49.5" transform="translate(-42.62 284.93) rotate(-45)"/>
+  <polygon class="cls-2" points="36.98 144.61 4.32 109.83 111.42 8.93 128.66 27.55 38.24 112.42 52 125.87 36.98 144.61"/>
+  <polygon class="cls-2" points="410.44 144.61 443.27 108.46 335.6 3.61 318.27 22.96 409.17 111.16 395.34 125.13 410.44 144.61"/>
+</svg>
