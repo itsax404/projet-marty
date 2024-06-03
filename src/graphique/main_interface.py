@@ -8,6 +8,7 @@ from ultraimport import ultraimport
 MartyPerso = ultraimport("__dir__/../python/marty_perso.py", "MartyPerso")
 expanding_police = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding);
 
+
 def set_svg_icon(self, button, svg_path, size: tuple[int, int] = (128, 128)):
     renderer = QSvgRenderer(svg_path)
     icon_size = QSize(size[0], size[1])
@@ -147,9 +148,8 @@ class DirectionalsArrows(QWidget):
         self.gridLayout = QGridLayout(self)
 
         self.left_button = QPushButton("", self)
-        icon = QIcon("src/graphique/icons/arrow/left_arrow.svg")
-        self.left_button.setIcon(icon)
-        self.left_button.clicked.connect(marty.move_left)
+        self.left_button = set_svg_icon(self, self.left_button, "src/graphique/icons/arrows/left_arrow.svg")
+        self.left_button.clicked.connect(self.marty.move_left)
         # self.left_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.left_button, 2, 0, 1, 1)
 
@@ -185,8 +185,7 @@ class DirectionalsArrows(QWidget):
 
         self.turn_right_button = QPushButton("", self)
         self.turn_right_button = set_svg_icon(self, self.turn_right_button, "src/graphique/icons/arrows/turn_right.svg")
-        self.turn_right_button.clicked.connect(marty.turn_right)
-
+        self.turn_right_button.clicked.connect(self.marty.turn_right)
 
         # self.turn_right_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.turn_right_button, 1, 2, 1, 1)
@@ -250,6 +249,7 @@ class ActionsBlocks(QWidget):
         self.stand_button.clicked.connect(self.marty.stand_up)
         # self.stand_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.stand_button, 0, 3, 1, 1)
+
 
 class MainWindow(QMainWindow):
     def __init__(self):

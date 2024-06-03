@@ -3,7 +3,7 @@ from martypy import Marty
 
 class MartyPerso:
     def __init__(self):
-        self.marty = Marty("wifi", "192.168.0.100")
+        self.marty = Marty("wifi", "192.168.0.103")
 
     def setIP(self, ip):
         self.marty = Marty("wifi", ip)
