@@ -3,7 +3,7 @@ from martypy import Marty
 
 class MartyPerso:
     def __init__(self):
-        self.marty = Marty("wifi", "192.168.0.103")
+        self.marty = Marty("wifi", "192.168.0.100")
 
     def setIP(self, ip):
         self.marty = Marty("wifi", ip)
@@ -18,7 +18,7 @@ class MartyPerso:
         self.marty.walk(2)
 
     def move_backward(self):
-        self.marty.walk(-2)
+        self.marty.walk(2, step_length=-20)
 
     def move_left(self):
         self.marty.sidestep("left")
