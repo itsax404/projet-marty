@@ -10,6 +10,7 @@ __pycache__/
 
 # Perso
 test/
+prive/
 
 # Distribution / packaging
 .Python

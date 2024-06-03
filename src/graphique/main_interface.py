@@ -1,8 +1,9 @@
-from PyQt6.QtSvg import QSvgRenderer
 from PySide6.QtCore import Qt, QTimer, QSize
 from PySide6.QtGui import QColor, QIcon, QPixmap, QFont, QPainter
+from PySide6.QtSvg import QSvgRenderer
 from PySide6.QtWidgets import QMainWindow, QGridLayout, QLabel, QPushButton, QWidget, QSizePolicy, QHBoxLayout, \
     QMessageBox, QLineEdit, QVBoxLayout, QFrame
+from ..python.marty_perso import MartyPerso
 
 expanding_police = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding);
 
@@ -24,9 +25,12 @@ def set_svg_icon(self, button, svg_path, size: tuple[int, int] = (128, 128)):
     button.setIconSize(icon_size)
     return button
 
+
 class InfoWidget(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, marty=None):
         super().__init__(parent)
+
+        self.marty = marty
 
         self.initUI()
         self.start_timer()
@@ -93,15 +97,18 @@ class InfoWidget(QWidget):
 
     def update_values(self):
         # Update the values in the labels
-        self.battery_label.setText(marty.get_battery_level())
-        self.distance_label.setText(marty.get_distance())
-        self.color_label.setText(marty.get_color_sensor())
-        self.connected_label.setText("🟢" if marty.is_connected() else "🔴")
+        self.battery_label.setText(self.marty.get_battery_level())
+        self.distance_label.setText(self.marty.get_distance())
+        self.color_label.setText(self.marty.get_color_sensor())
+        self.connected_label.setText("🟢" if self.marty.is_connected() else "🔴")
+
 
 class IPBlock(QWidget):
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, marty=None):
         super().__init__(parent)
+
+        self.marty = marty
 
         self.ip_entry = QLineEdit(self)
         self.ip_entry.setPlaceholderText("Entrez l'adresse IP")
@@ -123,21 +130,21 @@ class IPBlock(QWidget):
             ip_address = self.ip_entry.text()
             if ip_address:
                 QMessageBox.information(self, "Adresse IP", f"Connecté à l'adresse IP : {ip_address}")
-                marty.setIP(ip_address)
-                marty.connect()
+                self.marty.setIP(ip_address)
                 self.ip_entry.setDisabled(True)
                 self.connect_button.setText("Déconnecter")
             else:
                 QMessageBox.warning(self, "Erreur", "Veuillez entrer une adresse IP valide.")
         else:
             self.ip_entry.setDisabled(False)
-            marty.disconnect()
+            self.marty.disconnect()
             self.connect_button.setText("Connecter")
 
 
 class DirectionalsArrows(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, marty=None):
         super().__init__(parent)
+        self.marty = marty
 
         self.gridLayout = QGridLayout(self)
 
@@ -150,13 +157,13 @@ class DirectionalsArrows(QWidget):
 
         self.turn_left_button = QPushButton("", self)
         self.turn_left_button = set_svg_icon(self, self.turn_left_button, "src/graphique/icons/arrows/turn_left.svg")
-        self.turn_left_button.clicked.connect(marty.turn_left)
+        self.turn_left_button.clicked.connect(self.marty.turn_left)
         # self.turn_left_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.turn_left_button, 1, 0, 1, 1)
 
         self.up_button = QPushButton("", self)
         self.up_button = set_svg_icon(self, self.up_button, "src/graphique/icons/arrows/up_arrow.svg")
-        self.up_button.clicked.connect(marty.move_forward)
+        self.up_button.clicked.connect(self.marty.move_forward)
         # self.up_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.up_button, 1, 1, 1, 1)
 
@@ -168,13 +175,13 @@ class DirectionalsArrows(QWidget):
 
         self.down_button = QPushButton("", self)
         self.down_button = set_svg_icon(self, self.down_button, "src/graphique/icons/arrows/down_arrow.svg")
-        self.down_button.clicked.connect(marty.move_backward)
+        self.down_button.clicked.connect(self.marty.move_backward)
         # self.down_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.down_button, 3, 1, 1, 1)
 
         self.right_button = QPushButton("", self)
         self.right_button = set_svg_icon(self, self.right_button, "src/graphique/icons/arrows/right_arrow.svg")
-        self.right_button.clicked.connect(marty.move_right)
+        self.right_button.clicked.connect(self.marty.move_right)
         # self.right_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.right_button, 2, 2, 1, 1)
 
@@ -188,88 +195,85 @@ class DirectionalsArrows(QWidget):
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Left:
-            marty.move_left()
+            self.marty.move_left()
         elif event.key() == Qt.Key.Key_Right:
-            marty.move_right()
+            self.marty.move_right()
         elif event.key() == Qt.Key.Key_Up:
-            marty.move_forward()
+            self.marty.move_forward()
         elif event.key() == Qt.Key.Key_Down:
-            marty.move_backward()
+            self.marty.move_backward()
+
 
 class ActionsBlocks(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, marty=None):
         super().__init__(parent)
+
+        self.marty = marty
+
         self.gridLayout = QGridLayout(self)
 
         self.dance_button = QPushButton("🕺\nDanse", self)
-        self.dance_button.clicked.connect(marty.dance)
+        self.dance_button.clicked.connect(self.marty.dance)
         # self.dance_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.dance_button, 0, 0, 1, 1)
 
         self.circular_dance = QPushButton("💃\nDance circulaire", self)
-        self.circular_dance.clicked.connect(marty.circular_dance)
+        self.circular_dance.clicked.connect(self.marty.circular_dance)
         # self.circular_dance.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.circular_dance, 1, 2, 1, 1)
 
         self.kick_button = QPushButton("⚽\nTir", self)
-        self.kick_button.clicked.connect(marty.kick)
+        self.kick_button.clicked.connect(self.marty.kick)
         # self.kick_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.kick_button, 1, 1, 1, 1)
 
         self.eyes_button = QPushButton("", self)
         self.eyes_button = set_svg_icon(self, self.eyes_button, "src/graphique/icons/actions/eyes.svg")
-        self.eyes_button.clicked.connect(marty.eyes)
+        self.eyes_button.clicked.connect(self.marty.eyes)
         # self.eyes_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.eyes_button, 1, 0, 1, 1)
 
         self.celebrate_button = QPushButton("🎉\nCélébrer", self)
-        self.celebrate_button.clicked.connect(marty.celebrate)
+        self.celebrate_button.clicked.connect(self.marty.celebrate)
         # self.celebrate_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.celebrate_button, 0, 2, 1, 1)
 
         self.wiggle_eyes_buttons = QPushButton("🍑\nWiggle", self)
-        self.wiggle_eyes_buttons.clicked.connect(marty.wiggle_eyes)
+        self.wiggle_eyes_buttons.clicked.connect(self.marty.wiggle_eyes)
         # self.wiggle_eyes_buttons.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.wiggle_eyes_buttons, 0, 1, 1, 1)
 
-        self.rab = QPushButton("temp", self)
+        self.rab = QPushButton("Stop", self)
+        self.rab.clicked.connect(self.marty.stop)
         # self.rab.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.rab, 1, 3, 1, 1)
 
         self.stand_button = QPushButton("🧍\nDebout", self)
-        self.stand_button.clicked.connect(marty.stand_up)
+        self.stand_button.clicked.connect(self.marty.stand_up)
         # self.stand_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.stand_button, 0, 3, 1, 1)
 
+import pyglet
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.marty = MartyPerso()
         self.setObjectName("Contrôle de Marty")
         self.resize(800, 601)
         self.centralwidget = QWidget(self)
         self.setCentralWidget(self.centralwidget)
         self.layout = QGridLayout(self.centralwidget)
 
-        self.directional_arrows = DirectionalsArrows(self.centralwidget)
-        self.actions_block = ActionsBlocks(self.centralwidget)
-        self.ip_block = IPBlock(self.centralwidget)
-        self.infos_block = InfoWidget(self.centralwidget)
+        self.directional_arrows = DirectionalsArrows(self.centralwidget, self.marty)
+        self.actions_block = ActionsBlocks(self.centralwidget, self.marty)
+        self.ip_block = IPBlock(self.centralwidget, self.marty)
+        self.infos_block = InfoWidget(self.centralwidget, self.marty)
 
         self.layout.addWidget(self.ip_block, 0, 0, alignment=Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.infos_block, 0, 1, alignment=Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.directional_arrows, 1, 1, alignment=Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.actions_block, 1, 0, alignment=Qt.AlignmentFlag.AlignCenter)
-
-        def on_key_press(symbol, modifiers):
-            if symbol == pyglet.window.key.LEFT:
-                marty.move_left()
-            elif symbol == pyglet.window.key.RIGHT:
-                marty.move_right()
-            elif symbol == pyglet.window.key.UP:
-                marty.move_forward()
-            elif symbol == pyglet.window.key.DOWN:
-                marty.move_backward()
 
 
 if __name__ == "__main__":
