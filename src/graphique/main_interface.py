@@ -1,7 +1,5 @@
-import random
-
 from PyQt6.QtSvg import QSvgRenderer
-from PySide6.QtCore import QCoreApplication, Qt, QTimer, QSize
+from PySide6.QtCore import Qt, QTimer, QSize
 from PySide6.QtGui import QColor, QIcon, QPixmap, QFont, QPainter
 from PySide6.QtWidgets import QMainWindow, QGridLayout, QLabel, QPushButton, QWidget, QSizePolicy, QHBoxLayout, \
     QMessageBox, QLineEdit, QVBoxLayout, QFrame
@@ -13,7 +11,7 @@ marty = Marty()
 
 def set_svg_icon(self, button, svg_path, size: tuple[int, int] = (128, 128)):
     renderer = QSvgRenderer(svg_path)
-    icon_size = QSize(size[0], size[1])  # Set your desired icon size
+    icon_size = QSize(size[0], size[1])
     pixmap = QPixmap(icon_size)
     pixmap.fill(QColor("transparent"))
 
@@ -100,7 +98,6 @@ class InfoWidget(QWidget):
         self.color_label.setText(marty.get_color_sensor())
         self.connected_label.setText("🟢" if marty.is_connected() else "🔴")
 
-
 class IPBlock(QWidget):
 
     def __init__(self, parent=None):
@@ -145,7 +142,8 @@ class DirectionalsArrows(QWidget):
         self.gridLayout = QGridLayout(self)
 
         self.left_button = QPushButton("", self)
-        self.left_button = set_svg_icon(self, self.left_button, "src/graphique/icons/arrows/left_arrow.svg")
+        icon = QIcon("src/graphique/icons/arrow/left_arrow.svg")
+        self.left_button.setIcon(icon)
         self.left_button.clicked.connect(marty.move_left)
         # self.left_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.left_button, 2, 0, 1, 1)
@@ -182,7 +180,7 @@ class DirectionalsArrows(QWidget):
 
         self.turn_right_button = QPushButton("", self)
         self.turn_right_button = set_svg_icon(self, self.turn_right_button, "src/graphique/icons/arrows/turn_right.svg")
-        self.turn_right_button.clicked.connect(marty.turn_right
+        self.turn_right_button.clicked.connect(marty.turn_right)
 
 
         # self.turn_right_button.setSizePolicy(expanding_police)
@@ -243,7 +241,6 @@ class ActionsBlocks(QWidget):
         # self.stand_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.stand_button, 0, 3, 1, 1)
 
-import pyglet
 
 class MainWindow(QMainWindow):
     def __init__(self):
