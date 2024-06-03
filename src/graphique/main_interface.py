@@ -3,8 +3,10 @@ from PySide6.QtGui import QColor, QIcon, QPixmap, QFont, QPainter
 from PySide6.QtSvg import QSvgRenderer
 from PySide6.QtWidgets import QMainWindow, QGridLayout, QLabel, QPushButton, QWidget, QSizePolicy, QHBoxLayout, \
     QMessageBox, QLineEdit, QVBoxLayout, QFrame
-from ..python.marty_perso import MartyPerso
-
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from src.python.marty_perso import MartyPerso
 expanding_police = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding);
 
 
