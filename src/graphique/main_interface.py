@@ -3,12 +3,10 @@ from PySide6.QtGui import QColor, QIcon, QPixmap, QFont, QPainter
 from PySide6.QtSvg import QSvgRenderer
 from PySide6.QtWidgets import QMainWindow, QGridLayout, QLabel, QPushButton, QWidget, QSizePolicy, QHBoxLayout, \
     QMessageBox, QLineEdit, QVBoxLayout, QFrame
-from ..python.marty_perso import MartyPerso
+from ultraimport import ultraimport
 
+MartyPerso = ultraimport("__dir__/../python/marty_perso.py", "MartyPerso")
 expanding_police = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding);
-
-marty = Marty()
-
 
 def set_svg_icon(self, button, svg_path, size: tuple[int, int] = (128, 128)):
     renderer = QSvgRenderer(svg_path)
@@ -252,8 +250,6 @@ class ActionsBlocks(QWidget):
         self.stand_button.clicked.connect(self.marty.stand_up)
         # self.stand_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.stand_button, 0, 3, 1, 1)
-
-import pyglet
 
 class MainWindow(QMainWindow):
     def __init__(self):
