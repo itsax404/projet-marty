@@ -1,5 +1,7 @@
-from PySide6.QtCore import Qt, QTimer, QSize
-from PySide6.QtGui import QColor, QIcon, QPixmap, QFont, QPainter
+from asyncio import sleep
+
+from PySide6.QtCore import Qt, QTimer, QSize, QObject, QEvent
+from PySide6.QtGui import QColor, QIcon, QPixmap, QFont, QPainter, QKeyEvent
 from PySide6.QtSvg import QSvgRenderer
 from PySide6.QtWidgets import QMainWindow, QGridLayout, QLabel, QPushButton, QWidget, QSizePolicy, QHBoxLayout, \
     QMessageBox, QLineEdit, QVBoxLayout, QFrame
@@ -9,7 +11,7 @@ MartyPerso = ultraimport("__dir__/../python/marty_perso.py", "MartyPerso")
 expanding_police = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding);
 
 
-def set_svg_icon(self, button, svg_path, size: tuple[int, int] = (128, 128)):
+def set_svg_icon(self, button, svg_path, size: tuple[int, int] = (64, 64)):
     renderer = QSvgRenderer(svg_path)
     icon_size = QSize(size[0], size[1])
     pixmap = QPixmap(icon_size)
@@ -45,41 +47,34 @@ class InfoWidget(QWidget):
         frame.setLayout(grid)
 
         header_battery = QLabel("Batterie")
-        header_distance = QLabel("Distance")
         header_color = QLabel("Capteur de couleur")
         header_connected = QLabel("Connecté")
 
         font = QFont()
         font.setBold(True)
         header_battery.setFont(font)
-        header_distance.setFont(font)
         header_color.setFont(font)
         header_connected.setFont(font)
 
         header_battery.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        header_distance.setAlignment(Qt.AlignmentFlag.AlignCenter)
         header_color.setAlignment(Qt.AlignmentFlag.AlignCenter)
         header_connected.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         grid.addWidget(header_battery, 0, 0)
-        grid.addWidget(header_distance, 0, 1)
-        grid.addWidget(header_color, 0, 2)
-        grid.addWidget(header_connected, 0, 3)
+        grid.addWidget(header_color, 0, 1)
+        grid.addWidget(header_connected, 0, 2)
 
         self.battery_label = QLabel()
-        self.distance_label = QLabel()
         self.color_label = QLabel()
         self.connected_label = QLabel()
 
         self.battery_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.distance_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.color_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.connected_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         grid.addWidget(self.battery_label, 1, 0)
-        grid.addWidget(self.distance_label, 1, 1)
-        grid.addWidget(self.color_label, 1, 2)
-        grid.addWidget(self.connected_label, 1, 3)
+        grid.addWidget(self.color_label, 1, 1)
+        grid.addWidget(self.connected_label, 1, 2)
 
         main_layout.addWidget(frame)
         self.setLayout(main_layout)
@@ -92,12 +87,11 @@ class InfoWidget(QWidget):
         # Create a QTimer
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_values)
-        self.timer.start(1000)  # Timeout interval is 1000 ms or 1 second
+        self.timer.start(500)
 
     def update_values(self):
         # Update the values in the labels
-        self.battery_label.setText(self.marty.get_battery_level())
-        self.distance_label.setText(self.marty.get_distance())
+        self.battery_label.setText(f"{self.marty.get_battery_level()} %")
         self.color_label.setText(self.marty.get_color_sensor())
         self.connected_label.setText("🟢" if self.marty.is_connected() else "🔴")
 
@@ -190,15 +184,7 @@ class DirectionalsArrows(QWidget):
         # self.turn_right_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.turn_right_button, 1, 2, 1, 1)
 
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_Left:
-            self.marty.move_left()
-        elif event.key() == Qt.Key.Key_Right:
-            self.marty.move_right()
-        elif event.key() == Qt.Key.Key_Up:
-            self.marty.move_forward()
-        elif event.key() == Qt.Key.Key_Down:
-            self.marty.move_backward()
+
 
 
 class ActionsBlocks(QWidget):
@@ -224,7 +210,7 @@ class ActionsBlocks(QWidget):
         # self.kick_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.kick_button, 1, 1, 1, 1)
 
-        self.eyes_button = QPushButton("", self)
+        self.eyes_button = QPushButton("\nYeux", self)
         self.eyes_button = set_svg_icon(self, self.eyes_button, "src/graphique/icons/actions/eyes.svg")
         self.eyes_button.clicked.connect(self.marty.eyes)
         # self.eyes_button.setSizePolicy(expanding_police)
@@ -271,6 +257,20 @@ class MainWindow(QMainWindow):
         self.layout.addWidget(self.directional_arrows, 1, 1, alignment=Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.actions_block, 1, 0, alignment=Qt.AlignmentFlag.AlignCenter)
 
+    def keyPressEvent(self, event):
+        print("as")
+        if event.key() == Qt.Key.Key_Q:
+            self.marty.move_left()
+        elif event.key() == Qt.Key.Key_D:
+            self.marty.move_right()
+        elif event.key() == Qt.Key.Key_Z:
+            self.marty.move_forward()
+        elif event.key() == Qt.Key.Key_S:
+            self.marty.move_backward()
+        elif event.key() == Qt.Key.Key_A:
+            self.marty.turn_left()
+        elif event.key() == Qt.Key.Key_E:
+            self.marty.turn_right()
 
 if __name__ == "__main__":
     import sys
