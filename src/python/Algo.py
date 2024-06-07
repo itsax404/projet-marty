@@ -1,21 +1,25 @@
 from martypy import Marty
-from color import creer_image_couleur
+from marty_perso import MartyPerso
 
-marty1 = Marty("192.168.0.100")
-marty2 = Marty("192.168.0.101")
 
+marty1 = MartyPerso()
+marty1.setIP("127.0.0.1")
+marty2 = MartyPerso()
+marty2.setIP("127.0.0.1")
 
 Couleurs = {
-    "Rouge": "Nord",
-    "Bleu": "Sud",
-    "Vert": "Est",
-    "Jaune": "Ouest",
-    "Violet": "Arrêt"
+    "red": "Fin",
+    "lightblue": "Depart",
+    "green": "Est",
+    "yellow": "Ouest",
+    "darkblue": "Sud",
+    "pink": "Nord",
+    "black": "Vide"
 }
 
 
 def LireCouleur(marty):
-    return creer_image_couleur(marty.get_color_sensor_hex("LeftColorSensor"))
+    return marty.get_sensor_color()
 
 def Avancer(robot, direction):
     if direction == "Nord":
@@ -27,24 +31,23 @@ def Avancer(robot, direction):
     elif direction == "Ouest":
         robot.walk(4, direction='left')
 
-while True:
-    couleur_actuelle = LireCouleur(marty1)
-    direction = Couleurs.get(couleur_actuelle, "Arrêt")
-    if direction == "Arrêt":
-        break
+couleur_actuelle = LireCouleur(marty2)
+direction = Couleurs[couleur_actuelle]
+while direction != "Fin":
     Avancer(marty1, direction)
     marty1.stop()
+    couleur_actuelle = LireCouleur(marty1)
+    direction = Couleurs[couleur_actuelle]
 
-
-while True:
-    couleur_actuelle = LireCouleur(marty2)
-    direction = Couleurs.get(couleur_actuelle, "Arrêt")
-    if direction == "Arrêt":
-        break
+couleur_actuelle = LireCouleur(marty2)
+direction = Couleurs[couleur_actuelle]
+while direction != "Fin":
     Avancer(marty2, direction)
     marty2.stop()
+    couleur_actuelle = LireCouleur(marty2)
+    direction = Couleurs[couleur_actuelle]
 
 
-if LireCouleur(marty1) == "Violet" and LireCouleur(marty2) == "Violet":
+if LireCouleur(marty1) == "red" and LireCouleur(marty2) == "red":
     marty1.celebrate()
     marty2.celebrate()
