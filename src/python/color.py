@@ -8,7 +8,7 @@ def creer_image_couleur(rgb, taille=(100, 100)):
     image = Image.new("RGB", taille, rgb)
     image.show()
 
-marty = Marty("wifi","192.168.0.100")
+marty = Marty("wifi","192.168.0.117")
 marty.set_blocking(False)
 
 
@@ -21,15 +21,15 @@ blue_value = int(hex_color[4:6], 16)
 print(f"Red: {red_value} | Green: {green_value} | Blue: {blue_value}")
 
 rgb = (red_value, green_value, blue_value)  
-red_value = int(red_value * 120/100)
+red_value = int(red_value * 160/100)
 if(red_value > 255):
     n = red_value - 255
     red_value -= n
-green_value = int(green_value * 200/100)
+green_value = int(green_value * 260/100)
 if(green_value > 255):
     n = green_value - 255
     green_value -= n
-blue_value = int(blue_value * 220/100)
+blue_value = int(blue_value * 260/100)
 if(blue_value > 255):
     n = blue_value - 255
     blue_value -= n
@@ -56,6 +56,7 @@ elif((red_value > 200) and (green_value > 200) and (blue_value > 200)):
 
 elif((red_value < 30) and (green_value < 30) and (blue_value < 30)):
     print("black")
-    
+elif((red_value > 170 and red_value < 190) and (green_value > 50 and green_value < 70) and (blue_value > 80 and blue_value < 100)):
+    print("pink")
 else:
     print("unknown")
