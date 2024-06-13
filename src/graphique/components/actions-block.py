@@ -21,6 +21,7 @@ def set_svg_icon(self, button, svg_path, size: tuple[int, int] = (64, 64)):
     button.setIconSize(icon_size)
     return button
 
+
 class ActionsBlocks(QWidget):
     def __init__(self, parent=None, marty=None):
         super().__init__(parent)
@@ -69,4 +70,3 @@ class ActionsBlocks(QWidget):
         self.stand_button.clicked.connect(self.marty.stand_up)
         # self.stand_button.setSizePolicy(expanding_police)
         self.gridLayout.addWidget(self.stand_button, 0, 3, 1, 1)
-

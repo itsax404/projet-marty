@@ -1,9 +1,10 @@
 import asyncio
 import threading
 
-from marty_perso import MartyPerso
-from algo import Algo
+from ultraimport import ultraimport
 
+from marty_perso import MartyPerso
+Algo = ultraimport("__dir__/../python/algo.py", "Algo")
 class MartysController:
 
     def __init__(self, marty1: MartyPerso, marty2: MartyPerso) -> None:

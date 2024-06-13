@@ -3,16 +3,16 @@ from PySide6.QtWidgets import QMainWindow, QGridLayout, QWidget
 from ultraimport import ultraimport
 
 DirectionalsArrows = ultraimport("__dir__/../graphique/components/directionnal-arrows.py", "DirectionalsArrows")
-ActionsBlocks = ultraimport("__dir__/../graphique/components/actions-block.py", "ActionsBlock")
+ActionsBlocks = ultraimport("__dir__/../graphique/components/actions-block.py", "ActionsBlocks")
 IPBlock = ultraimport("__dir__/../graphique/components/ip-block.py", "IPBlock")
-InfoWidget = ultraimport("__dir__/../graphique/infos-marty.py", "InfoWidget")
+InfoWidget = ultraimport("__dir__/../graphique/components/infos-marty.py", "InfoWidget")
 
 MartyPerso = ultraimport("__dir__/../python/marty_perso.py", "MartyPerso")
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.marty = MartyPerso()
+        self.marty = MartyPerso("marty1")
         self.setObjectName("Contrôle de Marty")
         self.resize(800, 601)
         self.centralwidget = QWidget(self)
