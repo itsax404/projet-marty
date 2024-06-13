@@ -1,5 +1,6 @@
 from martypy import Marty
 from marty_perso import MartyPerso
+from collections import deque
 
 
 
@@ -17,7 +18,7 @@ Couleurs = {
     "yellow": "Sud",
     "darkblue": "Est",
     "pink": "Ouest",
-    "black": "Vide"
+    "black": "black"
 }
 
 parcours1 = [
@@ -69,7 +70,7 @@ def getVoisins(parcours):
             {'haut': 'black', 'bas' : 'black', 'gauche' : 'black', 'droite' : 'black'}
         ]
     ]
-
+    
     for i in range(3):
         for j in range(3):
             for key in voisins[i][j]:
@@ -88,7 +89,6 @@ def getVoisins(parcours):
     return voisins
 
 voisins = getVoisins(parcours3)
-print(voisins)
 
 def getDebutFin(parcours):
     xDepart, yDepart, xFin, yFin = 0, 0, 0, 0
@@ -101,10 +101,45 @@ def getDebutFin(parcours):
                 xFin = i
                 yFin = j
     return ((xDepart, yDepart),(xFin, yFin))
-
+    
 debut, fin = getDebutFin(parcours3)
 
-def getChemins(debut, fin, voisins):
+def getChemins(debut, fin, voisins, parcours):
+    lst = voisins[debut[0]][debut[1]]
+    chemin = []
+    for voisin, value in lst.items():
+        if(value != "black" and value != "red"):
+            essai = [value]
+            print(voisin)
+            x, y = debut
+            if(voisin == "haut"):
+                x -= 1
+            elif(voisin == "bas"):
+                x += 1
+            elif(voisin == "droite"):
+                y += 1
+            else:
+                y -= 1
+            continuer = True
+            while((x, y) != fin and continuer == True):
+                if(parcours[x][y] == "green" and x > 0):
+                    x -= 1
+                elif(parcours[x][y] == "yellow" and x < 2):
+                    x += 1
+                elif(parcours[x][y] == "darkblue" and y < 2):
+                    y += 1
+                elif(parcours[x][y] == "pink" and y > 0):
+                    y -= 1
+                else:
+                    continuer = False
+                print(x, y)
+                essai.append(parcours[x][y])
+            if(essai[-1] == "red"):
+                chemin = essai
+    return chemin
+
+chemin = getChemins(debut, fin, voisins, parcours3)
+print(chemin)
 
 
 def LireCouleur(marty):
