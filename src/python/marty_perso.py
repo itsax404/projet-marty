@@ -87,11 +87,11 @@ class MartyPerso:
         elif((red_value > 50 and red_value < 100) and (green_value > 50) and (blue_value > 40 and blue_value < 60)):
             return "green"
             
-        elif((red_value > 70 and red_value < 125 ) and (green_value > 100 and green_value < 155) and (blue_value > 130)):
-            return "blue"
+        elif((red_value > 40 and red_value < 50 ) and (green_value > 40 and green_value < 50) and (blue_value > 60 and blue_value < 70)):
+            return "darkblue"
             
-        elif((red_value > 50 and red_value < 100) and (green_value > 0 and green_value < 60) and (blue_value > 50 and blue_value < 120)):
-            return "purple"
+        elif((red_value > 100 and red_value < 110) and (green_value > 160 and green_value < 170) and (blue_value > 200 and blue_value < 210)):
+            return "lightblue"
             
         elif((red_value > 200) and (green_value > 180 and green_value < 220) and (blue_value > 100 and blue_value < 130)):
             return "yellow"

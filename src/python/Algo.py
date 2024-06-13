@@ -10,12 +10,30 @@ marty2.setIP("127.0.0.1")
 Couleurs = {
     "red": "Fin",
     "lightblue": "Depart",
-    "green": "Est",
-    "yellow": "Ouest",
-    "darkblue": "Sud",
-    "pink": "Nord",
+    "green": "Nord",
+    "yellow": "Sud",
+    "darkblue": "Est",
+    "pink": "Ouest",
     "black": "Vide"
 }
+
+parcours1 = [
+    ["Vide", "Vide", "Vide"],
+    ["Vide", "Vide", "Vide"],
+    ["Vide", "Vide", "Vide"]
+]
+
+parcours2 = [
+    ["Vide", "Vide", "Vide"],
+    ["Vide", "Vide", "Vide"],
+    ["Vide", "Vide", "Vide"]
+]
+
+parcours3 = [
+    ["Vide", "Vide", "Vide"],
+    ["Vide", "Vide", "Vide"],
+    ["Vide", "Vide", "Vide"]
+]
 
 
 def LireCouleur(marty):
