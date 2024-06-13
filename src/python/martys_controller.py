@@ -2,6 +2,7 @@ import asyncio
 import threading
 
 from marty_perso import MartyPerso
+from algo import Algo
 
 class MartysController:
 
@@ -11,22 +12,7 @@ class MartysController:
         self.verification_listes = False
         self.liste_fusionnee = True
 
-    def __fusion__(self, tab1, tab2):
-        tab3 = [
-            ["black", "black", "black"],
-            ["black", "black", "black"],
-            ["black", "black", "black"]
-        ]
-        for i in range(3):
-            for j in range(3):
-                if (tab1[i][j] == "black"):
-                    tab3[i][j] = tab2[i][j]
-                if (tab2[i][j] == "black"):
-                    tab3[i][j] = tab1[i][j]
-                if (tab1[i][j] == "lightblue" or tab1[i][j] == "red"):
-                    tab3[i][j] = tab1[i][j]
-        # TODO : appelle à la fonction pour obtenir le chemin le plus court
-        self.chemin_final = tab3
+
 
     def start_validation(self):
         self.verification_listes = True
@@ -38,7 +24,8 @@ class MartysController:
             if self.grille1[0][0] != 0 and self.grille2[0][0] != 0:
                 self.verification_listes = False
                 self.liste_fusionnee = True
-                self.__fusion__(self.grille1, self.grille2)
+                algoObject = Algo(self.grille1, self.grille2)
+                self.chemin_final = algoObject.getChemins()
 
     def explorer_marty_1(self):
         self.grille1 = self.marty1.explorer()
@@ -57,15 +44,17 @@ class MartysController:
             return False
         for instruction in self.chemin_final:
             match(instruction):
-                case "nord":
+                case "green":
                     self.marty1.move_forward(7)
+                    self.marty1.stand_up()
                     break
-                case "sud":
+                case "yellow":
                     self.marty1.move_backward(7)
+                    self.marty1.stand_up()
                     break
-                case "ouest":
+                case "pink":
                     self.marty1.move_left(9)
                     break
-                case "est":
+                case "darkblue":
                     self.marty1.move_right(9)
                     break
