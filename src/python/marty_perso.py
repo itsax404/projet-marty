@@ -1,3 +1,4 @@
+import time
 from asyncio import sleep
 
 from martypy import Marty
@@ -115,27 +116,36 @@ class MartyPerso:
             return "unknown"
 
     def explorer(self):
+        print("explorer")
+        self.marty.stand_straight()
         grille = [[0 for _ in range(3)] for _ in range(3)]
         for i in range(3):
+            print("a")
             if i % 2 == 0:
+                print("b")
                 for j in range(3):
+                    print("c")
                     if j != 0:
                         self.move_forward(7)
-                    sleep(500)
+                        self.marty.stand_straight()
+                    print("d")
+                    time.sleep(0.5)
                     color = self.get_color_sensor()
                     print(f"i : {i} | j : {j} | color : {color}")
                     grille[i][j] = color
             else:
                 for j in range(2, -1, -1):
                     if j != 2:
-                        self.move_backward(7)
-                    sleep(500)
+                        self.move_backward(9)
+                        self.stand_up()
+                    time.sleep(0.5)
                     color = self.get_color_sensor()
                     print(f"i : {i} | j : {j} | color : {color}")
                     grille[i][j] = color
             if i < 2:
-                self.move_left(5)
-                sleep(500)
+                self.move_left(7)
+                self.stand_up()
+                time.sleep(0.5)
                 print("gauche")
         return grille
 
