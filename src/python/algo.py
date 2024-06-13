@@ -110,17 +110,22 @@ class Algo:
         chemin = []
         for voisin, value in lst.items():
             if (value != "black" and value != "red"):
-                essai = [value]
+                essai = []
                 print(voisin)
                 x, y = debut
                 if (voisin == "haut"):
+                    essai.append("green")
                     x -= 1
                 elif (voisin == "bas"):
+                    essai.append("yellow")
                     x += 1
                 elif (voisin == "droite"):
+                    essai.append("darkblue")
                     y += 1
                 else:
+                    essai.append("pink")
                     y -= 1
+                essai.append(voisin)
                 continuer = True
                 while ((x, y) != fin and continuer == True):
                     if (parcoursFusionne[x][y] == "green" and x > 0):
