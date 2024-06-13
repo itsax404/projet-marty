@@ -1,9 +1,12 @@
+from asyncio import sleep
+
 from martypy import Marty
 
 
 class MartyPerso:
-    def __init__(self):
-        self.marty = Marty("wifi", "192.168.0.103")
+    def __init__(self, name):
+        self.marty = None
+        self.name = name
 
     def setIP(self, ip):
         self.marty = Marty("wifi", ip)
@@ -14,17 +17,17 @@ class MartyPerso:
     def disconnect(self):
         self.marty.close()
 
-    def move_forward(self):
-        self.marty.walk(2)
+    def move_forward(self, steps=2):
+        self.marty.walk(steps, 'auto', 0)
 
-    def move_backward(self):
-        self.marty.walk(2, step_length=-20)
+    def move_backward(self, steps=2):
+        self.marty.walk(steps, step_length=-20)
 
-    def move_left(self):
-        self.marty.sidestep("left")
+    def move_left(self, steps=1):
+        self.marty.sidestep("left", steps=steps)
 
-    def move_right(self):
-        self.marty.sidestep("right")
+    def move_right(self, steps=1):
+        self.marty.sidestep("right", steps=steps)
 
     def turn_left(self):
         self.marty.walk(2, turn=15)
@@ -61,6 +64,9 @@ class MartyPerso:
 
     def get_distance(self):
         return str(self.marty.get_distance_sensor())
+
+    def get_name(self):
+        return self.name
 
     def get_color_sensor(self):
         hex_color = str(self.marty.get_color_sensor_hex("LeftColorSensor"))
@@ -108,6 +114,34 @@ class MartyPerso:
         else:
             return "unknown"
 
+    def explorer(self):
+        grille = [[0 for _ in range(3)] for _ in range(3)]
+        for i in range(3):
+            if i % 2 == 0:
+                for j in range(3):
+                    if j != 0:
+                        self.move_forward(7)
+                    sleep(500)
+                    color = self.get_color_sensor()
+                    print(f"i : {i} | j : {j} | color : {color}")
+                    grille[i][j] = color
+            else:
+                for j in range(2, -1, -1):
+                    if j != 2:
+                        self.move_backward(7)
+                    sleep(500)
+                    color = self.get_color_sensor()
+                    print(f"i : {i} | j : {j} | color : {color}")
+                    grille[i][j] = color
+            if i < 2:
+                self.move_left(5)
+                sleep(500)
+                print("gauche")
+        return grille
+
+
     def is_connected(self):
+        if self.marty is None:
+            return False
         return self.marty.is_conn_ready()
 

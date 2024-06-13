@@ -2,9 +2,9 @@ from martypy import Marty
 from marty_perso import MartyPerso
 
 
-marty1 = MartyPerso()
+marty1 = MartyPerso("marty1")
 marty1.setIP("127.0.0.1")
-marty2 = MartyPerso()
+marty2 = MartyPerso("marty2")
 marty2.setIP("127.0.0.1")
 
 Couleurs = {
