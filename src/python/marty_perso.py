@@ -88,32 +88,37 @@ class MartyPerso:
             n = blue_value - 255
             blue_value -= n
 
-        if((red_value > 130) and (green_value > 20 and green_value < 60) and (blue_value > 30 and blue_value < 70)):
+        if (red_value > 130) and (20 < green_value < 60) and (30 < blue_value < 70):
             print("red")
-
-        elif((red_value > 50 and red_value < 100) and (green_value > 50) and (blue_value > 40 and blue_value < 90)):
+            return "red"
+        elif (50 < red_value < 100) and (green_value > 50) and (40 < blue_value < 90):
             print("green")
+            return "green"
             
-        elif((red_value > 35 and red_value < 60 ) and (green_value > 35 and green_value < 70) and (blue_value > 55 and blue_value < 90)):
+        elif (35 < red_value < 60) and (35 < green_value < 70) and (55 < blue_value < 90):
             print("darkblue")
+            return "darkblue"
             
-        elif((red_value > 80 and red_value < 115) and (green_value > 155 and green_value < 175) and (blue_value > 195 and blue_value < 230)):
+        elif (80 < red_value < 115) and (155 < green_value < 175) and (195 < blue_value < 230):
             print("lightblue")
+            return "lightblue"
             
-        elif((red_value > 200) and (green_value > 180 and green_value < 220) and (blue_value > 100 and blue_value < 130)):
+        elif (red_value > 200) and (180 < green_value < 220) and (100 < blue_value < 130):
             print("yellow")
+            return "yellow"
             
-        elif((red_value > 200) and (green_value > 200) and (blue_value > 200)):
-            return("white")
+        elif (red_value > 200) and (green_value > 200) and (blue_value > 200):
+            return "white"
 
-        elif((red_value < 30) and (green_value < 30) and (blue_value < 30)):
-            return("black")
+        elif (red_value < 30) and (green_value < 30) and (blue_value < 30):
+            print("black")
+            return "black"
         
-        elif((red_value > 170 and red_value < 190) and (green_value > 50 and green_value < 70) and (blue_value > 80 and blue_value < 120)):
-            return("pink")
+        elif (170 < red_value < 190) and (50 < green_value < 70) and (80 < blue_value < 120):
+            return "pink"
         
         else:
-            return("unknown")
+            return "unknown"
 
     def explorer(self):
         print("explorer")
@@ -136,14 +141,14 @@ class MartyPerso:
             else:
                 for j in range(2, -1, -1):
                     if j != 2:
-                        self.move_backward(9)
+                        self.move_backward(8)
                         self.stand_up()
                     time.sleep(0.5)
                     color = self.get_color_sensor()
                     print(f"i : {i} | j : {j} | color : {color}")
                     grille[i][j] = color
             if i < 2:
-                self.move_left(7)
+                self.move_left(9)
                 self.stand_up()
                 time.sleep(0.5)
                 print("gauche")
