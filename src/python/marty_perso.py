@@ -70,53 +70,87 @@ class MartyPerso:
         return self.name
 
     def get_color_sensor(self):
+        dict_tolerance_color1 = {}
+        dict_tolerance_color2 = {}
+        if self.name == "marty1":
+            return self.__get_color__sensor__(dict_tolerance_color1)
+        else:
+            return self.__get_color__sensor__(dict_tolerance_color2)
+
+    def __get_color__sensor__(self, dict_tolerance_color):
         hex_color = str(self.marty.get_color_sensor_hex("LeftColorSensor"))
         red_value = int(hex_color[0:2], 16)
         green_value = int(hex_color[2:4], 16)
         blue_value = int(hex_color[4:6], 16)
 
-        red_value = int(red_value * 120/100)
-        if(red_value > 255):
+        red_ratio = dict_tolerance_color["red_ratio"]
+        blue_ratio = dict_tolerance_color["blue_ratio"]
+        green_ratio = dict_tolerance_color["green_ratio"]
+
+        red_value = int(red_value * red_ratio)
+        if (red_value > 255):
             n = red_value - 255
             red_value -= n
-        green_value = int(green_value * 200/100)
-        if(green_value > 255):
+        green_value = int(green_value * green_ratio)
+        if (green_value > 255):
             n = green_value - 255
             green_value -= n
-        blue_value = int(blue_value * 200/100)
-        if(blue_value > 255):
+        blue_value = int(blue_value * blue_ratio)
+        if (blue_value > 255):
             n = blue_value - 255
             blue_value -= n
 
-        if (red_value > 130) and (20 < green_value < 60) and (30 < blue_value < 70):
-            print("red")
+        if (dict_tolerance_color["red"]["red_min"] < red_value < dict_tolerance_color["red"]["red_max"]) and (
+                dict_tolerance_color["red"]["green_min"] < green_value < dict_tolerance_color["red"]["green_max"]) and (
+                dict_tolerance_color["red"]["blue_min"] < blue_value < dict_tolerance_color["red"]["blue_max"]):
             return "red"
-        elif (50 < red_value < 100) and (green_value > 50) and (40 < blue_value < 90):
-            print("green")
+
+        elif (dict_tolerance_color["green"]["red_min"] < red_value < dict_tolerance_color["green"]["red_max"]) and (
+                dict_tolerance_color["green"]["green_min"] < green_value < dict_tolerance_color["green"][
+            "green_max"]) and (
+                dict_tolerance_color["green"]["blue_min"] < blue_value < dict_tolerance_color["green"]["blue_max"]):
             return "green"
-            
-        elif (35 < red_value < 60) and (35 < green_value < 70) and (55 < blue_value < 90):
-            print("darkblue")
+
+        elif (dict_tolerance_color["darkblue"]["red_min"] < red_value < dict_tolerance_color["darkblue"][
+            "red_max"]) and (
+                dict_tolerance_color["darkblue"]["green_min"] < green_value < dict_tolerance_color["darkblue"][
+            "green_max"]) and (
+                dict_tolerance_color["darkblue"]["blue_min"] < blue_value < dict_tolerance_color["darkblue"][
+            "blue_max"]):
             return "darkblue"
-            
-        elif (80 < red_value < 115) and (155 < green_value < 175) and (195 < blue_value < 230):
-            print("lightblue")
+
+        elif (dict_tolerance_color["lightblue"]["red_min"] < red_value < dict_tolerance_color["lightblue"][
+            "red_max"]) and (
+                dict_tolerance_color["lightblue"]["green_min"] < green_value < dict_tolerance_color["lightblue"][
+            "green_max"]) and (
+                dict_tolerance_color["lightblue"]["blue_min"] < blue_value < dict_tolerance_color["lightblue"][
+            "blue_max"]):
             return "lightblue"
-            
-        elif (red_value > 200) and (180 < green_value < 220) and (100 < blue_value < 130):
-            print("yellow")
+
+        elif (dict_tolerance_color["yellow"]["red_min"] < red_value < dict_tolerance_color["yellow"]["red_max"]) and (
+                dict_tolerance_color["yellow"]["green_min"] < green_value < dict_tolerance_color["yellow"][
+            "green_max"]) and (
+                dict_tolerance_color["yellow"]["blue_min"] < blue_value < dict_tolerance_color["yellow"]["blue_max"]):
             return "yellow"
-            
-        elif (red_value > 200) and (green_value > 200) and (blue_value > 200):
+
+        elif (dict_tolerance_color["white"]["red_min"] < red_value < dict_tolerance_color["white"]["red_max"]) and (
+                dict_tolerance_color["white"]["green_min"] < green_value < dict_tolerance_color["white"][
+            "green_max"]) and (
+                dict_tolerance_color["white"]["blue_min"] < blue_value < dict_tolerance_color["white"]["blue_max"]):
             return "white"
 
-        elif (red_value < 30) and (green_value < 30) and (blue_value < 30):
-            print("black")
+        elif (dict_tolerance_color["black"]["red_min"] < red_value < dict_tolerance_color["black"]["red_max"]) and (
+                dict_tolerance_color["black"]["green_min"] < green_value < dict_tolerance_color["black"][
+            "green_max"]) and (
+                dict_tolerance_color["black"]["blue_min"] < blue_value < dict_tolerance_color["black"]["blue_max"]):
             return "black"
-        
-        elif (170 < red_value < 190) and (50 < green_value < 70) and (80 < blue_value < 120):
+
+        elif (dict_tolerance_color["pink"]["red_min"] < red_value < dict_tolerance_color["pink"]["red_max"]) and (
+                dict_tolerance_color["pink"]["green_min"] < green_value < dict_tolerance_color["pink"][
+            "green_max"]) and (
+                dict_tolerance_color["pink"]["blue_min"] < blue_value < dict_tolerance_color["pink"]["blue_max"]):
             return "pink"
-        
+
         else:
             return "unknown"
 
