@@ -38,14 +38,20 @@ class MartysController:
                 case "green":
                     self.marty1.move_forward(7)
                     self.marty1.stand_up()
+                    self.marty2.move_forward(7)
+                    self.marty2.stand_up()
                     break
                 case "yellow":
                     self.marty1.move_backward(7)
                     self.marty1.stand_up()
+                    self.marty2.move_backward(7)
+                    self.marty2.stand_up()
                     break
                 case "pink":
                     self.marty1.move_left(9)
+                    self.marty2.move_left(9)
                     break
                 case "darkblue":
                     self.marty1.move_right(9)
+                    self.marty2.move_right(9)
                     break
