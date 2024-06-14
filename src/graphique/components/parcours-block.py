@@ -12,7 +12,7 @@ class ParcoursBlock(QWidget):
         self.gridLayout = QHBoxLayout(self)
 
         self.buttonScan = QPushButton("Lancer le scan du parcours", self)
-        self.buttonScan.clicked.connect(self.martys_controller.explorer())
+        self.buttonScan.clicked.connect(self.martys_controller.explorer)
 
         self.buttonParcours = QPushButton("Lancer le parcours final", self)
         self.buttonParcours.clicked.connect(self.martys_controller.run_labyrinthe)

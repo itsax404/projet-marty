@@ -36,7 +36,6 @@ class ParcoursInterface(QMainWindow):
         self.layout.addWidget(self.ip_block2, 1, 0, alignment=Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.infos_block2, 1, 1, alignment=Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.parcours_block1, 0, 2, alignment=Qt.AlignmentFlag.AlignCenter)
-        self.layout.addWidget(self.parcours_block2, 1, 2, alignment=Qt.AlignmentFlag.AlignCenter)
 
 if __name__ == "__main__":
     import sys

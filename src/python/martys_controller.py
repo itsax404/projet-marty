@@ -15,8 +15,10 @@ class MartysController:
         self.grille2 = [[0 for _ in range(3)] for _ in range(3)]
 
     def explorer(self):
-        self.explorer_marty_1()
-        self.explorer_marty_2()
+        if self.marty1 is not None:
+            self.explorer_marty_1()
+        if self.marty1 is not None:
+            self.explorer_marty_2()
 
     def explorer_marty_1(self):
         self.grille1 = self.marty1.explorer()
@@ -48,10 +50,10 @@ class MartysController:
                     self.marty2.stand_up()
                     break
                 case "pink":
-                    self.marty1.move_left(9)
-                    self.marty2.move_left(9)
+                    self.marty1.move_left(6)
+                    self.marty2.move_left(6)
                     break
                 case "darkblue":
-                    self.marty1.move_right(9)
-                    self.marty2.move_right(9)
+                    self.marty1.move_right(6)
+                    self.marty2.move_right(6)
                     break
