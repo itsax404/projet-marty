@@ -73,10 +73,14 @@ class MartyPerso:
         dict_tolerance_color1 = {'red_ratio': 1.1, 'green_ratio': 1.9, 'blue_ratio': 2.5, 'red': {'red_min': 130, 'red_max': 256, 'green_min': 20, 'green_max': 60, 'blue_min': 30, 'blue_max': 70}, 'green': {'red_min': 50, 'red_max': 100, 'green_min': 50, 'green_max': 255, 'blue_min': 55, 'blue_max': 90}, 'darkblue': {'red_min': 35, 'red_max': 60, 'green_min': 35, 'green_max': 70, 'blue_min': 55, 'blue_max': 90}, 'lightblue': {'red_min': 80, 'red_max': 115, 'green_min': 150, 'green_max': 175, 'blue_min': 
 195, 'blue_max': 256}, 'yellow': {'red_min': 10, 'red_max': 30, 'green_min': 180, 'green_max': 256, 'blue_min': 100, 'blue_max': 256}, 'white': {'red_min': 200, 'red_max': 256, 'green_min': 200, 'green_max': 256, 'blue_min': 200, 'blue_max': 256}, 'black': {'red_min': 0, 'red_max': 40, 'green_min': 0, 'green_max': 30, 'blue_min': 0, 'blue_max': 30}, 'pink': {'red_min': 170, 'red_max': 190, 'green_min': 50, 'green_max': 70, 'blue_min': 80, 'blue_max': 120}}
         dict_tolerance_color2 = {}
-        if self.name == "marty1":
-            return self.__get_color__sensor__(dict_tolerance_color1)
+        if self.name.lower() == "marty1":
+            color =  self.__get_color__sensor__(dict_tolerance_color1)
+            print(color)
+            return color    
         else:
-            return self.__get_color__sensor__(dict_tolerance_color2)
+            color =  self.__get_color__sensor__(dict_tolerance_color2)
+            print(color)
+            return color
 
     def __get_color__sensor__(self, dict_tolerance_color):
         hex_color = str(self.marty.get_color_sensor_hex("LeftColorSensor"))
@@ -176,14 +180,14 @@ class MartyPerso:
             else:
                 for j in range(2, -1, -1):
                     if j != 2:
-                        self.move_backward(8)
+                        self.move_backward(7)
                         self.stand_up()
                     time.sleep(0.5)
                     color = self.get_color_sensor()
                     print(f"i : {i} | j : {j} | color : {color}")
                     grille[i][j] = color
             if i < 2:
-                self.move_left(9)
+                self.move_left(5)
                 self.stand_up()
                 time.sleep(0.5)
                 print("gauche")
