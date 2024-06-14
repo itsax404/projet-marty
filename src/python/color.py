@@ -4,19 +4,19 @@ from martypy import Marty
 
 # Fonction pour créer une image d'une seule couleur
 
-marty = Marty("wifi", "192.168.0.102")
+marty = Marty("wifi", "192.168.0.2")
 marty.set_blocking(False)
 
 dict_tolerance_color = {
-    "red_ratio": 160 / 100,
-    "green_ratio": 240 / 100,
+    "red_ratio": 110 / 100,
+    "green_ratio": 190 / 100,
     "blue_ratio": 250 / 100,
-    "red": {"red_min": 130, "red_max": 255, "green_min": 20, "green_max": 60, "blue_min": 30, "blue_max": 70},
+    "red": {"red_min": 130, "red_max": 256, "green_min": 20, "green_max": 60, "blue_min": 30, "blue_max": 70},
     "green": {"red_min": 50, "red_max": 100, "green_min": 50, "green_max": 255, "blue_min": 55, "blue_max": 90},
     "darkblue": {"red_min": 35, "red_max": 60, "green_min": 35, "green_max": 70, "blue_min": 55, "blue_max": 90},
-    "lightblue": {"red_min": 80, "red_max": 115, "green_min": 150, "green_max": 175, "blue_min": 195, "blue_max": 230},
-    "yellow": {"red_min": 200, "red_max": 255, "green_min": 180, "green_max": 230, "blue_min": 100, "blue_max": 130},
-    "white": {"red_min": 200, "red_max": 255, "green_min": 200, "green_max": 255, "blue_min": 200, "blue_max": 255},
+    "lightblue": {"red_min": 80, "red_max": 115, "green_min": 150, "green_max": 175, "blue_min": 195, "blue_max": 256},
+    "yellow": {"red_min": 10, "red_max": 30, "green_min": 180, "green_max": 256, "blue_min": 100, "blue_max": 256},
+    "white": {"red_min": 200, "red_max": 256, "green_min": 200, "green_max": 256, "blue_min": 200, "blue_max": 256},
     "black": {"red_min": 0, "red_max": 40, "green_min": 0, "green_max": 30, "blue_min": 0, "blue_max": 30},
     "pink": {"red_min": 170, "red_max": 190, "green_min": 50, "green_max": 70, "blue_min": 80, "blue_max": 120},
 }
