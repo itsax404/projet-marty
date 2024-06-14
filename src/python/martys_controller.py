@@ -10,28 +10,16 @@ class MartysController:
     def __init__(self, marty1: MartyPerso, marty2: MartyPerso) -> None:
         self.marty1 = marty1
         self.marty2 = marty2
-        self.verification_listes = False
-        self.liste_fusionnee = True
 
+        self.grille1 = [[0 for _ in range(3)] for _ in range(3)]
+        self.grille2 = [[0 for _ in range(3)] for _ in range(3)]
 
-
-    def start_validation(self):
-        self.verification_listes = True
-        self.thread_verification = threading.Thread(target=self.verification_liste)
-        self.thread_verification.start()
-
-    def verification_liste(self):
-        while self.verification_listes:
-            if self.grille1[0][0] != 0 and self.grille2[0][0] != 0:
-                self.verification_listes = False
-                self.liste_fusionnee = True
-                algoObject = Algo(self.grille1, self.grille2)
-                self.chemin_final = algoObject.getChemins()
+    def explorer(self):
+        self.explorer_marty_1()
+        self.explorer_marty_2()
 
     def explorer_marty_1(self):
         self.grille1 = self.marty1.explorer()
-        if not self.thread_verification.is_alive():
-            self.start_validation()
         print(self.grille1)
 
     def explorer_marty_2(self):
@@ -41,9 +29,11 @@ class MartysController:
         print(self.grille2)
 
     def run_labyrinthe(self):
-        if not self.liste_fusionnee:
+        if self.grille1[0][0] == 0 or self.grille2[0][0]:
             return False
-        for instruction in self.chemin_final:
+        algoObject = Algo(self.grille1, self.grille2)
+        chemin_final = algoObject.getChemins()
+        for instruction in chemin_final:
             match(instruction):
                 case "green":
                     self.marty1.move_forward(7)

@@ -30,7 +30,6 @@ class ParcoursInterface(QMainWindow):
         self.infos_block2 = InfoWidget(self.centralwidget, self.marty2)
 
         self.parcours_block1 = ParcoursBlock(self.centralwidget, self.martys_controller, "marty1")
-        self.parcours_block2 = ParcoursBlock(self.centralwidget, self.martys_controller, "marty2")
 
         self.layout.addWidget(self.ip_block1, 0, 0, alignment=Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.infos_block1, 0, 1, alignment=Qt.AlignmentFlag.AlignCenter)
